@@ -57,3 +57,6 @@ build-iPhoneSimulator/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore log file
+log/development.log

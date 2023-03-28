@@ -59,4 +59,4 @@ build-iPhoneSimulator/
 /config/master.key
 
 # Ignore log file
-log/development.log
+log/*

@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_220743) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_29_150825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "infected_alerts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "warned_by_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_infected_alerts_on_user_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -32,5 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_220743) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "infected_alerts", "users"
+  add_foreign_key "infected_alerts", "users", column: "warned_by_id"
   add_foreign_key "items", "users"
 end

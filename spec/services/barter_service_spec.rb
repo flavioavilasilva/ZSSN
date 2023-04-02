@@ -68,48 +68,4 @@ RSpec.describe BarterService, type: :service do
       expect(barter.errors).to_not be_empty
     end
   end
-
-  
-
-  # context "when some user has no items to change" do
-  #   it "not change user items and barter object return errors" do 
-  #     user1 = User.create!(name: "Elvis", age: 22)
-  #     Item.create!(name: "water", user: user1)
-
-  #     user2 = User.create!(name: "Arnold", age: 25)
-
-  #     givin = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
-  #     receiven = { user_id: user2.id, items: [] }
-  #     barter = Barter.new(givin, receiven)
-      
-  #     barter_service = BarterService.new(barter)
-
-  #     expect { barter_service.call }.to_not change { user1.items.size }
-  #     expect(barter.errors).to_not be_empty
-  #   end
-  # end
-
-  # context "when users are not diferents" do
-  #   it "not change user items and barter object return errors" do 
-  #     user1 = User.create!(name: "Elvis", age: 22)
-  #     Item.create!(name: "water", user: user1)
-
-  #     givin = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
-  #     receiven = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
-  #     barter = Barter.new(givin, receiven)
-      
-  #     barter_service = BarterService.new(barter)
-
-  #     expect { barter_service.call }.to_not change { user1.items.size }
-  #     expect(barter.errors).to_not be_empty
-  #   end
-  # end
-
-  # context "when the items no have the same points" do
-
-  # end
-
-  # context "when some user has been infected" do
-
-  # end
 end

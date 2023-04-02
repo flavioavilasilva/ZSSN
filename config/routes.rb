@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :barters, only: [:create]
       resources :users do
         resources :items
         resources :infected_alerts

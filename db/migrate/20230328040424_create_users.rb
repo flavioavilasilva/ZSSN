@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :gender
       t.string :latitude
       t.string :longitude
+      t.boolean :infected, default: false
 
       t.timestamps
     end

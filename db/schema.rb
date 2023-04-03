@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_150825) do
     t.string "gender"
     t.string "latitude"
     t.string "longitude"
+    t.boolean "infected", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

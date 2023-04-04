@@ -5,7 +5,7 @@ RSpec.describe Reports::AverageOfItemsByUser, type: :model do
     it "returns 1" do
       user1 = User.create!(name: "Vera", age: 25, infected: false)
       user2 = User.create!(name: "Elvis", age: 25, infected: false)
-      user3 = User.create!(name: "Elvis", age: 25, infected: true)
+      user3 = User.create!(name: "Elvis", age: 25, infected: false)
 
       Item.create!(name: "water", user: user1)
       Item.create!(name: "water", user: user1)
@@ -15,6 +15,8 @@ RSpec.describe Reports::AverageOfItemsByUser, type: :model do
 
       Item.create!(name: "water", user: user3)
       Item.create!(name: "water", user: user3)
+
+      user3.update_attribute(:infected, true)
 
       expected_items = [
         { water: 2 },

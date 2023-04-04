@@ -3,4 +3,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :infected_alerts
+
+  scope :infected_users, -> { where(infected: true) }
+  scope :not_infected_users, -> { where(infected: false) }
 end

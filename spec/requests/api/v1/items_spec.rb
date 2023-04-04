@@ -66,7 +66,7 @@ RSpec.describe "/api/v1/items", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested api_v1_item" do
       user = User.create!(name: "Elvis", age: 22)
-      item = Item.create!(name: "Water", user: user)
+      item = Item.create!(name: "water", user: user)
 
       expect {
         delete api_v1_user_item_url(user, item), headers: {}, as: :json

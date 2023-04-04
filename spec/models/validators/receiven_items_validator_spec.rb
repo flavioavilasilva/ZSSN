@@ -25,9 +25,22 @@ RSpec.describe Validators::ReceivenItemsValidator do
   context 'with empty receiven_items' do
     it 'is invalid' do
       user1 = User.create!(name: "Elvis", age: 22)
+      user2 = User.create!(name: "Helton", age: 22)
       
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
-      receiven = { user_id: user1.id, items: [] }
+      receiven = { user_id: user2.id, items: [] }
+      
+      expect(Barter.new(given, receiven)).to_not be_valid
+    end
+  end
+
+  context 'with infected user' do
+    it 'is invalid' do
+      user1 = User.create!(name: "Elvis", age: 22, infected: false)
+      user2 = User.create!(name: "Helton", age: 22, infected: true)
+      
+      given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
+      receiven = { user_id: user2.id, items: [ { name: "water", quantity: 1 } ] }
       
       expect(Barter.new(given, receiven)).to_not be_valid
     end

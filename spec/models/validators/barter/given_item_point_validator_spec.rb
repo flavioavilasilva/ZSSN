@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Validators::GivenItemsPointsValidator do
+RSpec.describe Validators::Barter::GivenItemPointValidator do
   it 'is valid' do
     user1 = create(:user)
     user2 = create(:user)

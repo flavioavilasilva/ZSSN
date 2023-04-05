@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :user
-  validates_with Validators::NameItemsValidator
-  validates_with Validators::InfectedUsersValidator
+  validates_with Validators::Item::NameItemValidator
+  validates_with Validators::InfectedUserValidator
 
   belongs_to :user
 

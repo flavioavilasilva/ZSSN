@@ -1,4 +1,4 @@
-class Validators::ReceivenItemsValidator < ActiveModel::Validator
+class Validators::Barter::ReceivenItemValidator < ActiveModel::Validator
   def validate(record)
     return record.errors.add(:receiven_items, :is_nil) if record.receiven_items.nil?
     return record.errors.add(:receiven_items, :is_empty) if record.receiven_items[:items].nil? || record.receiven_items[:items].empty?

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item do
-    name { "water" }
+    name { 'water' }
     user { association :user }
   end
 end

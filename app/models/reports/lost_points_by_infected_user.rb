@@ -9,4 +9,3 @@ class Reports::LostPointsByInfectedUser
     Item.includes(:user).where(user: { infected: true }).and(Item.where(name: items))
   end
 end
-

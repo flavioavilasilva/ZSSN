@@ -13,7 +13,8 @@ class Api::V1::BartersController < ApplicationController
   end
 
   private
-    def api_v1_barter_params
-      params.permit(:given_items, :receiven_items)
-    end
+
+  def api_v1_barter_params
+    params.permit(:given_items, :receiven_items)
+  end
 end

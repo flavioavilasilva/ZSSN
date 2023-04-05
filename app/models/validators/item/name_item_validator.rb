@@ -5,7 +5,7 @@ class Validators::Item::NameItemValidator < ActiveModel::Validator
 
   def invalid_item?(name)
     return true if name.nil?
-    
+
     Item::VALID_ITEMS.include?(name.to_sym) == false
   end
 end

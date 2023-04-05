@@ -1,7 +1,7 @@
 class Reports::BaseInfectedUser
   def self.percentage
     total_users = User.all.count
-    return "Dados insuficientes" if total_users < 1 || query_count < 1
+    return 'Dados insuficientes' if total_users < 1 || query_count < 1
 
     query_count * 100 / total_users
   end

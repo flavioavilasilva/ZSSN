@@ -3,4 +3,3 @@ class Reports::InfectedUser < Reports::BaseInfectedUser
     User.infected_users.count
   end
 end
-

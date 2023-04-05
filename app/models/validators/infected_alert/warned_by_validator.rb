@@ -5,7 +5,8 @@ class Validators::InfectedAlert::WarnedByValidator < ActiveModel::Validator
   end
 
   private
-    def infected_user?(record)
-      record.warned_by.infected
-    end
+
+  def infected_user?(record)
+    record.warned_by.infected
+  end
 end

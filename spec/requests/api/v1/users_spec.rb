@@ -1,90 +1,90 @@
 require 'rails_helper'
 
-RSpec.describe "/api/v1/users", type: :request do
-  describe "GET /index" do
-    it "renders a successful response" do
+RSpec.describe '/api/v1/users', type: :request do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       create(:user)
       get api_v1_users_url, headers: {}, as: :json
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       user = create(:user)
       get api_v1_user_url(user), as: :json
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new User" do
-        expect {
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new User' do
+        expect do
           post api_v1_users_url,
-               params: { name:"Elton", age: 25 }, headers: {}, as: :json
-        }.to change(User, :count).by(1)
+               params: { name: 'Elton', age: 25 }, headers: {}, as: :json
+        end.to change(User, :count).by(1)
       end
 
-      it "renders a JSON response with the new api_v1_user" do
+      it 'renders a JSON response with the new api_v1_user' do
         post api_v1_users_url,
-             params: { name:"Elton", age: 25 }, headers: {}, as: :json
+             params: { name: 'Elton', age: 25 }, headers: {}, as: :json
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new User" do
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a new User' do
+        expect do
           post api_v1_users_url,
                params: { api_v1_user: {} }, as: :json
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
       end
 
-      it "renders a JSON response with errors for the new api_v1_user" do
+      it 'renders a JSON response with errors for the new api_v1_user' do
         post api_v1_users_url,
              params: { api_v1_user: {} }, headers: {}, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
+      let(:new_attributes) do
         {
-          latitude: "1",
-          longitude: "2"
+          latitude: '1',
+          longitude: '2'
         }
-      }
+      end
 
-      it "updates the requested api_v1_user" do
+      it 'updates the requested api_v1_user' do
         user = create(:user)
         patch api_v1_user_url(user),
               params: new_attributes, headers: {}, as: :json
         user.reload
-        expect(user.latitude).to eq("1")
-        expect(user.longitude).to eq("2")
+        expect(user.latitude).to eq('1')
+        expect(user.longitude).to eq('2')
       end
 
-      it "renders a JSON response with the api_v1_user" do
+      it 'renders a JSON response with the api_v1_user' do
         user = create(:user)
         patch api_v1_user_url(user),
               params: new_attributes, headers: {}, as: :json
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
 
-    context "with invalid parameters" do
-      it "renders a JSON response with errors for the api_v1_user" do
+    context 'with invalid parameters' do
+      it 'renders a JSON response with errors for the api_v1_user' do
         user = create(:user)
         patch api_v1_user_url(user),
               params: {}, headers: {}, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
   end

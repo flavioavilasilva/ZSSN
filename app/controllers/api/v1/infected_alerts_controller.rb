@@ -3,7 +3,6 @@ class Api::V1::InfectedAlertsController < ApplicationController
 
   # GET /api/v1/users/1/infected_users
   def index
-
     @api_v1_infected_alerts = InfectedAlert.where(user_id: api_v1_infected_alert_params[:user_id])
                                            .all
 
@@ -24,11 +23,6 @@ class Api::V1::InfectedAlertsController < ApplicationController
     else
       render json: @api_v1_infected_alerts.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /api/v1/users/1/infected_users/1
-  def destroy
-    @api_v1_infected_alerts.destroy
   end
 
   private

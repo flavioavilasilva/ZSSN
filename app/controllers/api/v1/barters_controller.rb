@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BartersController < ApplicationController
   # POST /api/v1/barters
   def create

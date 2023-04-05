@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reports::BaseInfectedUser
   def self.percentage
     total_users = User.all.count

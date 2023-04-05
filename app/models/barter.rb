@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Barter
   include ActiveModel::Validations
 
@@ -6,7 +8,7 @@ class Barter
   validates_with Validators::Barter::ReceivenItemValidator
   validates_with Validators::Barter::GivenItemPointValidator
 
-  attr_accessor :given_items, :given_items_points, :receiven_items, :receiven_items_points
+  attr_accessor :given_items, :receiven_items
 
   def initialize(given_items, receiven_items)
     @given_items = given_items

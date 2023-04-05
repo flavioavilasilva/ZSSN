@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::InfectedAlertsController < ApplicationController
   before_action :set_api_v1_infected_alert, only: %i[show update destroy]
 

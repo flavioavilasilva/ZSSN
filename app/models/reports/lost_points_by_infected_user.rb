@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reports::LostPointsByInfectedUser
   def self.points
     valid_items = Item::VALID_ITEMS.keys

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Validators::Barter::GivenItemPointValidator < ActiveModel::Validator
   def validate(record)
     return unless record.given_items_points != record.receiven_items_points

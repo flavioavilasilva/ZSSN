@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe '/api/v1/reports/lost_points_by_infected_users', type: :request do

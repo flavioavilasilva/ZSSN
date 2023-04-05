@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe InfectedAlert, type: :model do
@@ -21,7 +23,7 @@ RSpec.describe InfectedAlert, type: :model do
       it 'changes user infected status' do
         user1 = create(:user)
         user2 = create(:user)
-        infected_alert = create(:infected_alert, user: user1)
+        create(:infected_alert, user: user1)
         params_new_alert = { user: user1, warned_by_id: user2.id }
 
         expect do

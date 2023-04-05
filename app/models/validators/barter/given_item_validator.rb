@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Validators::Barter::GivenItemValidator < ActiveModel::Validator
   def validate(record)
     return record.errors.add(:given_items, :is_nil) if record.given_items.nil?

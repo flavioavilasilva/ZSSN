@@ -28,3 +28,7 @@ Style/Documentation:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"

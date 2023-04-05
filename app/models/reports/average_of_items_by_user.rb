@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reports::AverageOfItemsByUser
   def self.items
     Item::VALID_ITEMS.map do |k, _v|

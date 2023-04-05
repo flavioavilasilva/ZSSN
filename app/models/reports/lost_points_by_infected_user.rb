@@ -1,7 +1,7 @@
 class Reports::LostPointsByInfectedUser
   def self.points
     valid_items = Item::VALID_ITEMS.keys
-    query_item_by_user(valid_items).sum(:points)
+    query_item_by_user(valid_items).sum(&:points)
   end
 
   # Criar indices para user e items

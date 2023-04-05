@@ -43,7 +43,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def api_v1_user_params
-      params.fetch(:api_v1_user, {}).permit(:name, :gender, :age, :latitude, :longitude)
+      params.permit(:name, :gender, :age, :latitude, :longitude)
     end
 
     def valid_params?

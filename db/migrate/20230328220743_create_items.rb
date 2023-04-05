@@ -7,5 +7,7 @@ class CreateItems < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    
+    add_index :items, :name
   end
 end

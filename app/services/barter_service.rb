@@ -5,6 +5,8 @@ class BarterService
 
   def initialize(barter)
     @barter = barter
+    @user_given = User.find(barter.given_items[:user_id]) if barter.given_items.present?
+    @user_receiven = User.find(barter.receiven_items[:user_id]) if barter.receiven_items.present?
   end
 
   def call
@@ -17,21 +19,20 @@ class BarterService
 
   def barter_items
     ActiveRecord::Base.transaction do
-      user_given = User.find(barter.given_items[:user_id])
-      user_receiven = User.find(barter.receiven_items[:user_id])
-
-      items_user_given_ids = extract_items_ids(barter.given_items[:items], user_given)
-      items_user_receiven_ids = extract_items_ids(barter.receiven_items[:items], user_receiven)
-
-      Item.where(id: items_user_given_ids).update_all(user_id: user_receiven.id)
-      Item.where(id: items_user_receiven_ids).update_all(user_id: user_given.id)
+      apply_the_barter(items_ids(barter.given_items[:items], @user_given), @user_receiven)
+      apply_the_barter(items_ids(barter.receiven_items[:items], @user_receiven), @user_given)
     end
   rescue ActiveRecord::StatementInvalid => e
     barter.errors.add(:database, e)
     false
   end
 
-  def extract_items_ids(items, user)
+  def apply_the_barter(items_ids, user_to)
+    Item.where(id: items_ids)
+        .update_all(user_id: user_to.id)
+  end
+
+  def items_ids(items, user)
     items_user_ids = []
 
     items.map do |item|

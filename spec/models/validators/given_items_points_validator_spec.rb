@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Validators::GivenItemsPointsValidator do
   it 'is valid' do
-    user1 = User.create!(name: "Elvis", age: 22)
-    user2 = User.create!(name: "Eli", age: 22)
-
+    user1 = create(:user)
+    user2 = create(:user)
     given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
     receiven = { user_id: user2.id, items: [ { name: "food", quantity: 1 }, { name: "ammo", quantity: 1} ] }
 
@@ -13,8 +12,7 @@ RSpec.describe Validators::GivenItemsPointsValidator do
   
   context 'with diferent points between receiven and given' do
     it 'is invalid' do
-      user1 = User.create!(name: "Elvis", age: 22)
-
+      user1 = create(:user)
       given = { user_id: user1.id, items: [ { name: "water", quantity: 2 } ] }
       receiven = { user_id: user1.id, items: [ { name: "food", quantity: 1 } ] }
       

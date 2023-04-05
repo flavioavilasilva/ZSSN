@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Validators::ReceivenItemsValidator do
   it 'is valid' do
-    user1 = User.create!(name: "Elvis", age: 22)
-    user2 = User.create!(name: "Eli", age: 22)
+    user1 = create(:user)
+    user2 = create(:user)
 
     given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
     receiven = { user_id: user2.id, items: [ { name: "food", quantity: 1 }, { name: "ammo", quantity: 1} ] }
@@ -13,7 +13,7 @@ RSpec.describe Validators::ReceivenItemsValidator do
   
   context 'with the same user of the given_items' do
     it 'is invalid' do
-      user1 = User.create!(name: "Elvis", age: 22)
+      user1 = create(:user)
       
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user1.id, items: [ { name: "food", quantity: 1 }, { name: "ammo", quantity: 1} ] }
@@ -24,8 +24,8 @@ RSpec.describe Validators::ReceivenItemsValidator do
 
   context 'with empty receiven_items' do
     it 'is invalid' do
-      user1 = User.create!(name: "Elvis", age: 22)
-      user2 = User.create!(name: "Helton", age: 22)
+      user1 = create(:user)
+      user2 = create(:user)
       
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user2.id, items: [] }
@@ -36,8 +36,8 @@ RSpec.describe Validators::ReceivenItemsValidator do
 
   context 'with infected user' do
     it 'is invalid' do
-      user1 = User.create!(name: "Elvis", age: 22, infected: false)
-      user2 = User.create!(name: "Helton", age: 22, infected: true)
+      user1 = create(:user, infected: false)
+      user2 = create(:user, infected: true)
       
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user2.id, items: [ { name: "water", quantity: 1 } ] }

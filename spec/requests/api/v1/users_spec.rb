@@ -22,13 +22,13 @@ RSpec.describe "/api/v1/users", type: :request do
       it "creates a new User" do
         expect {
           post api_v1_users_url,
-               params: { api_v1_user: valid_attributes }, headers: {}, as: :json
+               params: { name:"Elton", age: 25 }, headers: {}, as: :json
         }.to change(User, :count).by(1)
       end
 
       it "renders a JSON response with the new api_v1_user" do
         post api_v1_users_url,
-             params: { api_v1_user: valid_attributes }, headers: {}, as: :json
+             params: { name:"Elton", age: 25 }, headers: {}, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
@@ -63,7 +63,7 @@ RSpec.describe "/api/v1/users", type: :request do
       it "updates the requested api_v1_user" do
         user = create(:user)
         patch api_v1_user_url(user),
-              params: { api_v1_user: new_attributes }, headers: {}, as: :json
+              params: new_attributes, headers: {}, as: :json
         user.reload
         expect(user.latitude).to eq("1")
         expect(user.longitude).to eq("2")
@@ -72,7 +72,7 @@ RSpec.describe "/api/v1/users", type: :request do
       it "renders a JSON response with the api_v1_user" do
         user = create(:user)
         patch api_v1_user_url(user),
-              params: { api_v1_user: new_attributes }, headers: {}, as: :json
+              params: new_attributes, headers: {}, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
@@ -82,7 +82,7 @@ RSpec.describe "/api/v1/users", type: :request do
       it "renders a JSON response with errors for the api_v1_user" do
         user = create(:user)
         patch api_v1_user_url(user),
-              params: { api_v1_user: {} }, headers: {}, as: :json
+              params: {}, headers: {}, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including("application/json"))
       end

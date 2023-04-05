@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::ItemsController < ApplicationController
-  before_action :set_api_v1_user_item, only: %i[ show update destroy ]
+  before_action :set_api_v1_user_item, only: %i[show update destroy]
 
   # GET /api/v1/users/1/items
   def index
@@ -16,7 +18,7 @@ class Api::V1::ItemsController < ApplicationController
   # POST /api/v1/users/1/items
   def create
     @api_v1_user_item = Item.new(api_v1_user_item_params)
-    
+
     return render json: @api_v1_user_item.errors, status: :unprocessable_entity unless @api_v1_user_item.valid?
 
     if @api_v1_user_item.save
@@ -41,11 +43,12 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   private
-    def set_api_v1_user_item
-      @api_v1_user_item = Item.find(params[:id])
-    end
 
-    def api_v1_user_item_params
-      params.permit(:name, :user_id)
-    end
+  def set_api_v1_user_item
+    @api_v1_user_item = Item.find(params[:id])
+  end
+
+  def api_v1_user_item_params
+    params.permit(:name, :user_id)
+  end
 end

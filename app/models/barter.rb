@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Barter
   include ActiveModel::Validations
 
@@ -5,8 +7,8 @@ class Barter
   validates_with Validators::Barter::GivenItemPointValidator
   validates_with Validators::Barter::ReceivenItemValidator
   validates_with Validators::Barter::GivenItemPointValidator
-  
-  attr_accessor :given_items, :given_items_points, :receiven_items, :receiven_items_points
+
+  attr_accessor :given_items, :receiven_items
 
   def initialize(given_items, receiven_items)
     @given_items = given_items
@@ -26,15 +28,16 @@ class Barter
   end
 
   private
-    def sum_items(items)
-      return if items.nil?
 
-      sum = 0
+  def sum_items(items)
+    return if items.nil?
 
-      items.map do |item|
-        sum += (Item::VALID_ITEMS[item[:name].to_sym] * item[:quantity])
-      end
+    sum = 0
 
-      sum
+    items.map do |item|
+      sum += (Item::VALID_ITEMS[item[:name].to_sym] * item[:quantity])
     end
+
+    sum
+  end
 end

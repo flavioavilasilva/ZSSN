@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::InfectedAlertsController < ApplicationController
-  before_action :set_api_v1_infected_alert, only: %i[ show update destroy ]
+  before_action :set_api_v1_infected_alert, only: %i[show update destroy]
 
   # GET /api/v1/users/1/infected_users
   def index
@@ -26,11 +28,12 @@ class Api::V1::InfectedAlertsController < ApplicationController
   end
 
   private
-    def set_api_v1_infected_alert
-      @api_v1_infected_alerts = InfectedAlert.find(params[:id])
-    end
 
-    def api_v1_infected_alert_params
-      params.permit(:user_id, :warned_by_id)
-    end
+  def set_api_v1_infected_alert
+    @api_v1_infected_alerts = InfectedAlert.find(params[:id])
+  end
+
+  def api_v1_infected_alert_params
+    params.permit(:user_id, :warned_by_id)
+  end
 end

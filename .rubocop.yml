@@ -1,0 +1,34 @@
+# This is the configuration used to check the rubocop source code.
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'Rakefile'
+    - 'Gemfile'
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'config/**/*'
+    - 'db/*'
+    - 'db/migrate/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/*'
+  TargetRubyVersion: 3.1.0
+  SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"

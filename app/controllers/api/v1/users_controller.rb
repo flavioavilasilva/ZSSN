@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::UsersController < ApplicationController
-  before_action :set_api_v1_user, only: %i[ show update destroy ]
+  before_action :set_api_v1_user, only: %i[show update destroy]
 
   # GET /api/v1/users
   def index
@@ -16,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
   # POST /api/v1/users
   def create
     @api_v1_user = User.new(api_v1_user_params)
-    
+
     return render json: {}, status: :unprocessable_entity unless @api_v1_user.valid?
 
     if @api_v1_user.save
@@ -38,16 +40,18 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
-    def set_api_v1_user
-      @api_v1_user = User.find(params[:id])
-    end
 
-    def api_v1_user_params
-      params.permit(:name, :gender, :age, :latitude, :longitude)
-    end
+  def set_api_v1_user
+    @api_v1_user = User.find(params[:id])
+  end
 
-    def valid_params?
-      return false if api_v1_user_params[:name].nil?
-      true
-    end
+  def api_v1_user_params
+    params.permit(:name, :gender, :age, :latitude, :longitude)
+  end
+
+  def valid_params?
+    return false if api_v1_user_params[:name].nil?
+
+    true
+  end
 end

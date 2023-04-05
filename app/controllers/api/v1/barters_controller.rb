@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BartersController < ApplicationController
   # POST /api/v1/barters
   def create
@@ -13,7 +15,8 @@ class Api::V1::BartersController < ApplicationController
   end
 
   private
-    def api_v1_barter_params
-      params.permit(:given_items, :receiven_items)
-    end
+
+  def api_v1_barter_params
+    params.permit(:given_items, :receiven_items)
+  end
 end

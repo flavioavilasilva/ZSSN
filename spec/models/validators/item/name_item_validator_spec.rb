@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Validators::GivenItemsPointsValidator do
+RSpec.describe Validators::Item::NameItemValidator do
   it 'is valid' do
     user1 = create(:user)
     invalid_item = { name: "water", user_id: user1.id }

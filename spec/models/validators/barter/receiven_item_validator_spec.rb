@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Validators::GivenItemsValidator do
+RSpec.describe Validators::Barter::ReceivenItemValidator do
   it 'is valid' do
     user1 = create(:user)
     user2 = create(:user)
@@ -10,7 +10,7 @@ RSpec.describe Validators::GivenItemsValidator do
     expect(Barter.new(given, receiven)).to be_valid
   end
   
-  context 'with the same user of the receiven_items' do
+  context 'with the same user of the given_items' do
     it 'is invalid' do
       user1 = create(:user)
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
@@ -20,12 +20,12 @@ RSpec.describe Validators::GivenItemsValidator do
     end
   end
 
-  context 'with empty given_items' do
+  context 'with empty receiven_items' do
     it 'is invalid' do
       user1 = create(:user)
       user2 = create(:user)
-      given = { user_id: user1.id, items: [] }
-      receiven = { user_id: user2.id, items: [ { name: "water", quantity: 1 } ] }
+      given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
+      receiven = { user_id: user2.id, items: [] }
       
       expect(Barter.new(given, receiven)).to_not be_valid
     end
@@ -33,8 +33,8 @@ RSpec.describe Validators::GivenItemsValidator do
 
   context 'with infected user' do
     it 'is invalid' do
-      user1 = create(:user, infected: true)
-      user2 = create(:user, infected: false)
+      user1 = create(:user, infected: false)
+      user2 = create(:user, infected: true)
       given = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user2.id, items: [ { name: "water", quantity: 1 } ] }
       

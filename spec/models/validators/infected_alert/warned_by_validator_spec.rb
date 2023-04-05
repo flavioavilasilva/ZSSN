@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Validators::WarnedByValidator do
+RSpec.describe Validators::InfectedAlert::WarnedByValidator do
   it 'is valid' do
     user1 = create(:user)
     user2 = create(:user)

@@ -1,10 +1,10 @@
 class Barter
   include ActiveModel::Validations
 
-  validates_with Validators::GivenItemsValidator
-  validates_with Validators::GivenItemsPointsValidator
-  validates_with Validators::ReceivenItemsValidator
-  validates_with Validators::GivenItemsPointsValidator
+  validates_with Validators::Barter::GivenItemValidator
+  validates_with Validators::Barter::GivenItemPointValidator
+  validates_with Validators::Barter::ReceivenItemValidator
+  validates_with Validators::Barter::GivenItemPointValidator
   
   attr_accessor :given_items, :given_items_points, :receiven_items, :receiven_items_points
 

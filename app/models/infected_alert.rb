@@ -2,7 +2,7 @@ class InfectedAlert < ApplicationRecord
   belongs_to :user
   belongs_to :warned_by, class_name: 'User'
 
-  validates_with Validators::WarnedByValidator
+  validates_with Validators::InfectedAlert::WarnedByValidator
 
   after_save :set_user_infected
 

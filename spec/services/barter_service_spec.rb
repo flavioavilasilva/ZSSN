@@ -3,14 +3,13 @@ require 'rails_helper'
 RSpec.describe BarterService, type: :service do
   context "When barter is valid" do
     it "transfers the items between the users" do
-      user1 = User.create!(name: "Elvis", age: 22)
-      Item.create!(name: "water", user: user1)
-      Item.create!(name: "water", user: user1)
-      Item.create!(name: "food", user: user1)
-  
-      user2 = User.create!(name: "Arnold", age: 25)
-      Item.create!(name: "food", user: user2)
-      Item.create!(name: "ammo", user: user2)
+      user1 = create(:user)
+      create_list(:item, 2, user: user1, name: "water")
+      create(:item, user: user1, name: "food")
+
+      user2 = create(:user)
+      create(:item, user: user2, name: "food")
+      create(:item, user: user2, name: "ammo")
   
       givin = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user2.id, items: [ { name: "food", quantity: 1 }, { name: "ammo", quantity: 1} ] }
@@ -44,13 +43,13 @@ RSpec.describe BarterService, type: :service do
     end
 
     it "the users items not change" do 
-      user1 = User.create!(name: "Elvis", age: 22)
-      Item.create!(name: "water", user: user1)
-      Item.create!(name: "food", user: user1)
+      user1 = create(:user)
+      create(:item, user: user1, name: "water")
+      create(:item, user: user1, name: "food")
   
       user2 = User.create!(name: "Arnold", age: 25)
-      Item.create!(name: "food", user: user2)
-      Item.create!(name: "ammo", user: user2)
+      create(:item, user: user2, name: "food")
+      create(:item, user: user2, name: "ammo")
   
       givin = { user_id: user1.id, items: [ { name: "water", quantity: 1 } ] }
       receiven = { user_id: user2.id, items: [ { name: "food", quantity: 1 }, { name: "ammo", quantity: 1} ] }

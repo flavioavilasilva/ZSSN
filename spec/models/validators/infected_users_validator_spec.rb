@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Validators::InfectedUsersValidator do
   describe "#validate" do
     it 'is valid' do
-      user1 = User.create!(name: "Elvis", age: 22, infected: false)
+      user1 = create(:user, infected: false)
       record = Item.new(name: "water", user: user1)
 
       Validators::InfectedUsersValidator.new.validate(record)
@@ -12,7 +12,7 @@ RSpec.describe Validators::InfectedUsersValidator do
     end
 
     it "is invalid" do
-      user1 = User.create!(name: "Elvis", age: 22, infected: true)
+      user1 = create(:user, infected: true)
       record = Item.new(name: "water", user: user1)
 
       Validators::InfectedUsersValidator.new.validate(record)

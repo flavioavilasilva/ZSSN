@@ -5,8 +5,8 @@ RSpec.describe Reports::BaseInfectedUser, type: :model do
     context "when has users" do 
       it "returns the % of infected users" do
         allow(Reports::BaseInfectedUser).to receive(:query_count).and_return(1)
-        User.create!(name: "Arnold", age: 25, infected: false)
-        User.create!(name: "Vera", age: 25, infected: true)
+        create(:user, infected: false)
+        create(:user, infected: true)
         
         expect(Reports::BaseInfectedUser.percentage).to eq(50)
       end

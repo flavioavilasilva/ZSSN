@@ -5,7 +5,8 @@ class Api::V1::ItemsController < ApplicationController
 
   # GET /api/v1/users/1/items
   def index
-    @api_v1_user_items = Item.all
+    @api_v1_user_items = Item.includes(:user)
+                             .where(user: { infected: false, id: api_v1_user_item_params[:user_id] })
 
     render json: @api_v1_user_items
   end
@@ -19,19 +20,8 @@ class Api::V1::ItemsController < ApplicationController
   def create
     @api_v1_user_item = Item.new(api_v1_user_item_params)
 
-    return render json: @api_v1_user_item.errors, status: :unprocessable_entity unless @api_v1_user_item.valid?
-
     if @api_v1_user_item.save
-      render json: {}, status: :created
-    else
-      render json: @api_v1_user_item.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /api/v1/users/1/items/1
-  def update
-    if @api_v1_user_item.update(api_v1_user_item_params)
-      render json: @api_v1_user_item
+      render json: @api_v1_user_item.to_json, status: :created
     else
       render json: @api_v1_user_item.errors, status: :unprocessable_entity
     end

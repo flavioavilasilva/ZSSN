@@ -4,8 +4,8 @@ Esta aplicacão tem como maior objetivo explorar conhecimentos para o desafio de
 
     - Cadastro de usuários.
     - Atualizar localização de usuário.
-    - Marcar usuário como infectado.
     - Adicionar e remover items do usuário.
+    - Marcar usuário como infectado.
     - Escambo de items.
     - Relatórios: 
         Porcentagem de usuários infectados; 
@@ -32,13 +32,7 @@ Topics:
 
 ## Pontapé inicial
 
-*** Antes de começar, existe um arquivo .env.example, ele contem valores para variaveis de ambiente, copie e renomeie para .env ***
-
-Executar o bundler para instalar as gems do projeto:
-
-```bash
-bundle install
-```
+*** Antes de começar, certifique-se que o arquivo database.yml esteja configurado corretamento, é importante que a chave "host" esteja definido com o nome do serviço no container_name (postgres_db) do docker-compose.yml ***
 
 ## Construindo o container 
 
@@ -77,7 +71,7 @@ Após executar os testes pelo rspec, um arquivos é criado na pasta 'coverage/in
 Para checar alguma inconformidade de lint de código, basta executar o rubocop:
 
 ```bash
-docker-compose run --rm web bundler exec rubocop
+docker-compose run --rm --no-deps api bundler exec rubocop
 ```
 
 ## Executando a aplicação em um docker

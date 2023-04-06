@@ -32,7 +32,7 @@ Topics:
 
 ## Pontapé inicial
 
-*** Antes de começar, certifique-se que o arquivo database.yml esteja configurado corretamento, é importante que a chave "host" esteja definido com o nome do serviço no container_name (postgres_db) do docker-compose.yml ***
+*** Antes de começar, certifique-se que o arquivo database.yml esteja configurado corretamente, é importante que a chave "host" esteja definida com o nome do serviço no container_name (postgres_db) do docker-compose.yml ***
 
 ## Construindo o container 
 

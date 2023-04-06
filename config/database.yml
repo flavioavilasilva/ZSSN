@@ -5,6 +5,7 @@
 #   gem "sqlite3"
 #
 default: &default
+  host: postgres_db
   adapter: postgresql
   encoding: unicode
   pool: 5

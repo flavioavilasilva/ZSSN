@@ -1,0 +1,173 @@
+FORMAT: 1A
+HOST: https://localhost:3000/api/v1
+
+### Criar novo usuário [POST /users]
+
+Endpoint para criação de novo usuário, necessita um token admin para tal ação.
+
++ Request (application/json) 
+
+    + Body
+
+            {
+                "name": "User", 
+                "age": 22,
+                "latitude": "1",
+                "longitude": "-1"
+            }
+
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "name": "User", 
+                "age": 22,
+                "latitude": "1",
+                "longitude": "-1"
+            }
+
+### Atualiza um usuário [PATCH /users/1]
+
+Endpoint para atualizar usuário.
+
++ Request (application/json)
+    
+    + Body
+
+            {
+                "latitude": "2",
+                "longitude": "-2"
+            } 
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "name": "User", 
+                "age": 22,
+                "latitude": "2",
+                "longitude": "-2"
+            }
+
+### Adiciona item para usuário [POST /users/1/items]
+
+Endpoint para adicionar item para usuário.
+
++ Request (application/json)
+    
+    + Body
+
+            {
+                "name": "water"
+            } 
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "item added"
+            }
+
+### Remove item para usuário [POST /users/1/items/1]
+
+Endpoint para remover item de usuário.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "item removed"
+            }
+
+### Marca usuário como infectado [POST /users/1/infected_alerts]
+
+Endpoint para adicionar item para usuário.
+
++ Request (application/json)
+    
+    + Body
+
+            {
+                "warned_by_id": 1
+            } 
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "created alert"
+            }
+
+### Troca items entre usuários [POST /barters]
+
+Endpoint para fazer escambo.
+
++ Request (application/json)
+    
+    + Body
+
+            {
+                "given_items": {"user_id":1, "items":[{"name": "water", "quantity": 1 }]},
+                "receiven_items": {"user_id":2, "items":[{"name": "water", "quantity": 1 }]}
+            } 
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "barter done"
+            }
+
+### Relatório de usuários infectados [GET /reports/infected_users]
+
+Endpoint para relatório de usuários infectados.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "infected_users_percentage": 40
+            }
+
+### Relatório de usuários não infectados [GET /reports/not_infected_users]
+
+Endpoint para relatório de usuários não infectados.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "not_infected_users_percentage": 60
+            }
+
+### Relatório de media de items por usuário [GET /reports/average_of_items_by_users]
+
+Endpoint para relatório de media de items por usuário.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "items": [ {"water": 1}, {"food": 1} ]
+            }
+
+### Relatório de pontos perdidos por usuários infectados [GET /reports/lost_points_by_infected_users]
+
+Endpoint para relatório de pontos perdidos por usuários infectados.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "points": 8
+            }

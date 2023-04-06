@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /api/v1/users
   def index
-    @api_v1_users = User.all
+    @api_v1_users = User.not_infected_users
 
     render json: @api_v1_users
   end
@@ -19,10 +19,8 @@ class Api::V1::UsersController < ApplicationController
   def create
     @api_v1_user = User.new(api_v1_user_params)
 
-    return render json: {}, status: :unprocessable_entity unless @api_v1_user.valid?
-
     if @api_v1_user.save
-      render json: {}, status: :created
+      render json: @api_v1_user.to_json, status: :created
     else
       render json: @api_v1_user.errors, status: :unprocessable_entity
     end
@@ -33,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
     return render json: {}, status: :unprocessable_entity if api_v1_user_params.blank?
 
     if @api_v1_user.update(api_v1_user_params)
-      render json: {}
+      render json: @api_v1_user.to_json
     else
       render json: @api_v1_user.errors, status: :unprocessable_entity
     end

@@ -21,7 +21,7 @@ class Api::V1::InfectedAlertsController < ApplicationController
     @api_v1_infected_alerts = InfectedAlert.new(api_v1_infected_alert_params)
 
     if @api_v1_infected_alerts.save
-      render json: {}, status: :created
+      render json: @api_v1_infected_alerts.to_json, status: :created
     else
       render json: @api_v1_infected_alerts.errors, status: :unprocessable_entity
     end

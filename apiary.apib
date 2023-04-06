@@ -68,22 +68,16 @@ Endpoint para adicionar item para usuário.
     + Body
 
             {
-                "item added"
+                "name": "water"
             }
 
 ### Remove item para usuário [POST /users/1/items/1]
 
 Endpoint para remover item de usuário.
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
 
-    + Body
-
-            {
-                "item removed"
-            }
-
-### Marca usuário como infectado [POST /users/1/infected_alerts]
+### Marca usuário como infectado [POST /users/2/infected_alerts]
 
 Endpoint para adicionar item para usuário.
 
@@ -100,8 +94,9 @@ Endpoint para adicionar item para usuário.
     + Body
 
             {
-                "created alert"
-            }
+                "user_id": 2
+                "warned_by_id": 1
+            } 
 
 ### Troca items entre usuários [POST /barters]
 
@@ -157,7 +152,10 @@ Endpoint para relatório de media de items por usuário.
     + Body
 
             {
-                "items": [ {"water": 1}, {"food": 1} ]
+                "items": [ 
+                    {"water": 1}, 
+                    {"food": 1} 
+                ]
             }
 
 ### Relatório de pontos perdidos por usuários infectados [GET /reports/lost_points_by_infected_users]

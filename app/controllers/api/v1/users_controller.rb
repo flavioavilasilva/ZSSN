@@ -44,12 +44,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def api_v1_user_params
-    params.permit(:name, :gender, :age, :latitude, :longitude)
-  end
-
-  def valid_params?
-    return false if api_v1_user_params[:name].nil?
-
-    true
+    params.require(:user).permit(:name, :gender, :age, :latitude, :longitude)
   end
 end

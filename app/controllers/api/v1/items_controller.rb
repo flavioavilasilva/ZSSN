@@ -6,7 +6,7 @@ class Api::V1::ItemsController < ApplicationController
   # GET /api/v1/users/1/items
   def index
     @api_v1_user_items = Item.includes(:user)
-                             .where(user: { infected: false, id: api_v1_user_item_params[:user_id] })
+                             .where(user: { id: params[:user_id], infected: false })
 
     render json: @api_v1_user_items
   end
@@ -39,6 +39,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def api_v1_user_item_params
-    params.permit(:name, :user_id)
+    params.require(:item).permit(:name).merge(user_id: params['user_id'])
   end
 end

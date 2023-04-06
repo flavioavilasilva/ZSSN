@@ -50,14 +50,14 @@ RSpec.describe '/api/v1/users/1/items', type: :request do
 
         expect do
           post api_v1_user_items_url(user),
-               params: {}, as: :json
+               params: { item: { x: 1 } }, as: :json
         end.to change(Item, :count).by(0)
       end
 
       it 'renders a JSON response with errors for the new api_v1_item' do
         user = create(:user)
         post api_v1_user_items_url(user),
-             params: {}, headers: {}, as: :json
+             params: { item: { x: 1 } }, headers: {}, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including('application/json'))
       end

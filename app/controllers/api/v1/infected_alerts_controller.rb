@@ -5,7 +5,7 @@ class Api::V1::InfectedAlertsController < ApplicationController
 
   # GET /api/v1/users/1/infected_users
   def index
-    @api_v1_infected_alerts = InfectedAlert.where(user_id: api_v1_infected_alert_params[:user_id])
+    @api_v1_infected_alerts = InfectedAlert.where(user_id: params['user_id'])
                                            .all
 
     render json: @api_v1_infected_alerts
@@ -34,6 +34,8 @@ class Api::V1::InfectedAlertsController < ApplicationController
   end
 
   def api_v1_infected_alert_params
-    params.permit(:user_id, :warned_by_id)
+    params.require(:infected_alert)
+          .permit(:user_id, :warned_by_id)
+          .merge(user_id: params['user_id']) || {}
   end
 end

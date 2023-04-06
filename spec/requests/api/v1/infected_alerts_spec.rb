@@ -33,7 +33,7 @@ RSpec.describe '/api/v1/infected_alerts', type: :request do
 
         expect do
           post api_v1_user_infected_alerts_url(user1),
-               params: { warned_by_id: user2.id }, headers: {}, as: :json
+               params: { infected_alert: { warned_by_id: user2.id } }, headers: {}, as: :json
         end.to change(InfectedAlert, :count).by(1)
       end
 
@@ -42,7 +42,7 @@ RSpec.describe '/api/v1/infected_alerts', type: :request do
         user2 = create(:user)
 
         post api_v1_user_infected_alerts_url(user1),
-             params: { warned_by_id: user2.id }, headers: {}, as: :json
+             params: { infected_alert: { warned_by_id: user2.id } }, headers: {}, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -54,7 +54,7 @@ RSpec.describe '/api/v1/infected_alerts', type: :request do
 
         expect do
           post api_v1_user_infected_alerts_url(user1),
-               params: {}, as: :json
+               params: { infected_alert: { x: 1 } }, as: :json
         end.to change(InfectedAlert, :count).by(0)
       end
 
@@ -62,7 +62,7 @@ RSpec.describe '/api/v1/infected_alerts', type: :request do
         user1 = create(:user)
 
         post api_v1_user_infected_alerts_url(user1),
-             params: {}, headers: {}, as: :json
+             params: { infected_alert: { x: 1 } }, headers: {}, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
